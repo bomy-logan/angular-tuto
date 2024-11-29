@@ -1,0 +1,11 @@
+{
+  "/trefle-api": {
+    "target": "https://trefle.io",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/trefle-api": "/api/v1"
+    }
+  }
+}

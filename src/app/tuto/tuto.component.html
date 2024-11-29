@@ -1,0 +1,39 @@
+<h2>Tuto Store :</h2>
+<ul>
+  @for (user of usersList; track user.id) {
+    <li>
+      {{ user.name }}
+    </li>
+  }
+</ul>
+<input type="text" [formControl]="userName" placeholder="Add user" />
+<button (click)="addUser()">Ajouter un utilisateur</button>
+
+<h2>Tuto I18N :</h2>
+<h1 i18n="introductionHeader">Hello i18n!</h1>
+
+<h2>Tuto API :</h2>
+@if (data && !loading) {
+  <div class="plants">
+    @for (item of data; track item.id) {
+      <div class="plant">
+        <div class="description">
+          <p>{{ item.common_name }}</p>
+          <p>{{ item.scientific_name }}</p>
+          <p>{{ item.family_common_name }}</p>
+          <p>{{ item.genus }}</p>
+          <p>{{ item.status }}</p>
+        </div>
+        <div class="picture" [style]="{ 'background-image': 'url(' + item.image_url + ')' }"></div>
+      </div>
+    }
+  </div>
+}
+@else if (loading) {
+  <p>loading</p>
+}
+
+<h2>Tuto Parent/Child component :</h2>
+<p>valeur du parent : {{ dataChild }}</p>
+<app-tutoChild [count]="dataChild" (valueChange)="dataChild = $event"></app-tutoChild>
+
