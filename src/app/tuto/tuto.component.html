@@ -34,6 +34,9 @@
 }
 
 <h2>Tuto Parent/Child component :</h2>
-<p>valeur du parent : {{ dataChild }}</p>
-<app-tutoChild [count]="dataChild" (valueChange)="dataChild = $event"></app-tutoChild>
+<p>valeur du parent : {{ dataChild() }}</p>
+<app-tutoChild [count]="dataChild()" (valueChange)="updateData($event)"></app-tutoChild>
+
+<h2>Tuto WebComponent</h2>
+<user-element [users]="usersList"></user-element>
 

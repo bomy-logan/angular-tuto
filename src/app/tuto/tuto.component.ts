@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, signal } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Plant } from '../models/plant';
 import { FormControl, ReactiveFormsModule } from '@angular/forms';
@@ -12,7 +12,8 @@ import { TutoChildComponent } from '../tutoChild/tutoChild.component';
   standalone: true,
   imports: [ReactiveFormsModule, TutoChildComponent],
   templateUrl: './tuto.component.html',
-  styleUrl: './tuto.component.scss'
+  styleUrl: './tuto.component.scss',
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 
 export class TutoComponent {
@@ -20,7 +21,7 @@ export class TutoComponent {
   loading: boolean = false;
   usersList: User[] = [];
   userName = new FormControl('');
-  dataChild: number = 0;
+  dataChild = signal(0);
 
   constructor(
     private apiService: ApiService,
@@ -40,6 +41,10 @@ export class TutoComponent {
       const newUser: User = { id: Date.now() + Math.floor(Math.random() * 1000), name: this.userName.value };
       this.store.dispatch(new AddUser(newUser));
     }
+  }
+
+  updateData(newValue: number) {
+    this.dataChild.update(() => newValue);
   }
 
   private loadPlants() {
